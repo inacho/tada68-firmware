@@ -14,7 +14,7 @@ fi
 # Countdown to have enough time to put the keyboard in flash mode
 
 echo -n "Flashing the firmware in "
-for i in {8..1};do echo -n "$i." && sleep 1; done
+for i in {15..1};do echo -n "$i." && sleep 1; done
 echo ""
 
 # /Volumes/TADA68\ \ /tada68_nacho.bin

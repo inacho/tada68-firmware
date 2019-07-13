@@ -75,6 +75,11 @@ void keymap_led_blink(void)
 #endif
 }
 
+uint32_t default_layer_state_set_user(uint32_t state) {
+    keymap_led_blink();
+    return state;
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_dynamic_macro(keycode, record)) {
         return false;
