@@ -66,6 +66,15 @@ enum custom_keycodes {
 #define DF_WIN DF(LAYER_WIN)
 #define DF_MAC DF(LAYER_MAC)
 
+void keymap_led_blink(void)
+{
+#ifdef BACKLIGHT_ENABLE
+    backlight_toggle();
+    wait_ms(100);
+    backlight_toggle();
+#endif
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_dynamic_macro(keycode, record)) {
         return false;
@@ -76,6 +85,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
             // FN1 key macros
             case MCR_SSH:
+                keymap_led_blink();
                 SEND_STRING(SS_TAP(X_ENTER)"~."); // Disconnect SSH session
                 return false;
             case MCR_EUR:
