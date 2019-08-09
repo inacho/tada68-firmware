@@ -5,6 +5,7 @@ enum custom_keycodes {
     // FN1 macros
     MCR_SSH = SAFE_RANGE,
     MCR_EUR,
+    MCR_TERM, // Cmd + k, Cmd + [
 
     // CapsLock single tap macros
     MCR_ARR,  // ->
@@ -95,6 +96,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             case MCR_EUR:
                 SEND_STRING(SS_LALT(SS_LSFT("2"))); // €
+                return false;
+            case MCR_TERM:
+                SEND_STRING(SS_LGUI("k")SS_LGUI("[")); // Cmd + k, Cmd + [
                 return false;
 
 
@@ -235,10 +239,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     // Activated holding FN1
     [LAYER_FN1] = LAYOUT_ansi( \
-        MCR_SSH,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, KC_F11,   KC_F12,  KC_F13, KC_F14, \
-        _______, _______,  DF_WIN, MCR_EUR, DYN_REC, DYN_STO, _______, _______, _______, _______, _______, _______, _______, _______, _______,\
-        KC_CAPS,   KC_F1,   KC_F2, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, KC_MFFD,\
-        _______,          _______, _______, _______, _______, _______, _______,  DF_MAC, _______, _______, _______, _______, KC_PGUP, KC_MRWD,\
+        MCR_SSH,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,    KC_F8,   KC_F9,  KC_F10, KC_F11,   KC_F12,  KC_F13, KC_F14, \
+        _______, _______,  DF_WIN, MCR_EUR, DYN_REC, DYN_STO, _______, _______,  _______, _______, _______, _______, _______, _______, _______,\
+        KC_CAPS,   KC_F1,   KC_F2, _______, _______, _______, _______, _______, MCR_TERM, _______, _______, _______,          _______, KC_MFFD,\
+        _______,          _______, _______, _______, _______, _______, _______,   DF_MAC, _______, _______, _______, _______, KC_PGUP, KC_MRWD,\
         _______, _______, _______,               _______,          _______, _______, _______,                       KC_HOME, KC_PGDN, KC_END  \
     ),
     // Activated holding FN2
